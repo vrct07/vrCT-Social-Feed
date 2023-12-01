@@ -36,6 +36,10 @@ export function Post(props) {
        setNewCommentText(event.target.value)
     }
 
+    function deleteComment (comment) {
+        console.log (`Deletar o comentário "${comment}"`)
+    }
+
     return ( 
         <div className={styles.post}>
            <article>
@@ -48,7 +52,7 @@ export function Post(props) {
                             <span>{props.author.role}</span>
                         </div>
                     </div>
-                    <time title={publishedDateFormatted} dateTime={props.publishedAt.toISOString}>{publishedDateRelativeToNow}</time>
+                    <time title={publishedDateFormatted} dateTime={props.publishedAt.toISOString()}>{publishedDateRelativeToNow}</time>
                 </header>
 
                 <div className={styles.content}>
@@ -76,7 +80,12 @@ export function Post(props) {
 
                 <div className={styles.commentList}>
                     {comments.map(comment => {
-                        return <Comment key={comment} content={comment}/>
+                        return (
+                        <Comment 
+                            key={comment} 
+                            content={comment} 
+                            onDeleteComment={deleteComment} 
+                        />)
                     })}
                 </div>
            </article>
